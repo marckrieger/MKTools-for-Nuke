@@ -31,10 +31,13 @@ def create_panel():
                         return str(valueToConvert)
         
                 value = valueConversion(value)
-        
+                propertyExists = False
                 for node in selectedNodes:
                     if node.knob(property):
+                        propertyExists = True
                         node.knob(str(property)).setValue(value)
+                if not propertyExists:
+                    nuke.message('The given property does not exist or cannot be found in any of the selected nodes.')
             else:
                 nuke.message('A property and a value are required.')
     else:
